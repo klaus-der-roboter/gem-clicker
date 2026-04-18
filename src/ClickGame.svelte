@@ -4,6 +4,7 @@
   import { MeshPhongMaterial, BoxGeometry, SphereGeometry } from 'three';
   import Scene from './Scene.svelte';
   import HUD from './HUD.svelte';
+  import { onMount } from 'svelte';
 
   let clicks = 0;
   let gems = 0;
@@ -19,11 +20,21 @@
     clickSpeed: 40
   };
 
+  onMount(() => {
+    const interval = setInterval(() => {
+      if (upgrades.autoClick > 0) {
+        const gemsPerSecond = upgrades.autoClick * 0.5;
+        gems += gemsPerSecond / 10; // Divide by 10 since this runs 10 times per second
+      }
+    }, 100); // Update 10 times per second
+
+    return () => clearInterval(interval);
+  });
+
   const clickGem = () => {
     clicks++;
     const power = 1 + upgrades.clickPower * 0.5;
     gems += power;
-    cps = upgrades.autoClick * 0.5;
   };
 
   const buyUpgrade = (type) => {
@@ -31,7 +42,6 @@
       gems -= upgradeCosts[type];
       upgrades[type]++;
       upgradeCosts[type] = Math.floor(upgradeCosts[type] * 1.15);
-      cps = upgrades.autoClick * 0.5;
     }
   };
 
@@ -42,6 +52,8 @@
     upgrades = { autoClick: 0, clickPower: 0, clickSpeed: 0 };
     upgradeCosts = { autoClick: 50, clickPower: 25, clickSpeed: 40 };
   };
+
+  $: cps = upgrades.autoClick * 0.5;
 </script>
 
 <div class="container">
