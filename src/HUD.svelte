@@ -62,16 +62,6 @@
         <span class="cost">${upgradeCosts.clickPower}</span>
       </button>
 
-      <button
-        class="upgrade-btn"
-        on:click={() => handleUpgrade('clickSpeed')}
-        disabled={gems < upgradeCosts.clickSpeed}
-      >
-        <span>Click Speed</span>
-        <span class="level">{upgrades.clickSpeed}</span>
-        <span class="cost">${upgradeCosts.clickSpeed}</span>
-      </button>
-
       <button class="reset-btn" on:click={handleReset}>Reset</button>
     </div>
   </div>

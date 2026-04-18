@@ -11,13 +11,11 @@
   let cps = 0; // gems per second
   let upgrades = {
     autoClick: 0,
-    clickPower: 0,
-    clickSpeed: 0
+    clickPower: 0
   };
   let upgradeCosts = {
     autoClick: 50,
-    clickPower: 25,
-    clickSpeed: 40
+    clickPower: 25
   };
 
   onMount(() => {
@@ -49,8 +47,8 @@
     clicks = 0;
     gems = 0;
     cps = 0;
-    upgrades = { autoClick: 0, clickPower: 0, clickSpeed: 0 };
-    upgradeCosts = { autoClick: 50, clickPower: 25, clickSpeed: 40 };
+    upgrades = { autoClick: 0, clickPower: 0 };
+    upgradeCosts = { autoClick: 50, clickPower: 25 };
   };
 
   $: cps = upgrades.autoClick * 0.5;
